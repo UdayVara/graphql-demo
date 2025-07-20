@@ -1,0 +1,31 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserSchema {
+  id: String!
+  age: Int!
+  username: String!
+  email: String!
+  isActive: Boolean!
+  tasks: [task!]!
+}
+
+type task {
+  id: String!
+  title: String!
+  description: String!
+  userId: String!
+  priority: priorityType!
+}
+
+enum priorityType {
+  low
+  medium
+  high
+}
+
+type Query {
+  users(search: String, limit: Int!, offset: Int!): [UserSchema!]!
+  userById(id: String!): UserSchema!
+}
