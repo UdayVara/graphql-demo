@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/services/prisma.service';
 import { getUserArgument } from './Args/getUserArgs.arguments';
+import { addUserInput } from './Input/addUser.input';
 
 @Injectable()
 export class UserService {
@@ -38,6 +39,33 @@ export class UserService {
         });
     }
 
+    async create(data:addUserInput) {
+        return await this.prisma.user.create({
+            data: {...data,isActive:true}
+        });
+    }
+
+    async update(id:string,data:addUserInput) {
+        return await this.prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {...data}
+        });
+    }
+
+    async delete(id:string) {
+        await this.prisma.tasks.deleteMany({
+            where: {
+                userId: id
+            }
+        })
+        return await this.prisma.user.delete({
+            where: {
+                id: id
+            }
+        });
+    }
     async findTaskByUserId(id:string) {
         return await this.prisma.tasks.findMany({
             where: {

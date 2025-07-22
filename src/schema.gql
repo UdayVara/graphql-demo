@@ -29,3 +29,15 @@ type Query {
   users(search: String, limit: Int!, offset: Int!): [UserSchema!]!
   userById(id: String!): UserSchema!
 }
+
+type Mutation {
+  createUser(data: addUserInput!): UserSchema!
+  updateUser(id: String!, data: addUserInput!): UserSchema!
+  deleteUser(id: String!): UserSchema!
+}
+
+input addUserInput {
+  username: String!
+  email: String!
+  age: Int!
+}
