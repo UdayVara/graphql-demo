@@ -28,16 +28,28 @@ enum priorityType {
 type Query {
   users(search: String, limit: Int!, offset: Int!): [UserSchema!]!
   userById(id: String!): UserSchema!
+  tasks: [task!]!
+  tasksByUserId(id: String!): [task!]!
 }
 
 type Mutation {
   createUser(data: addUserInput!): UserSchema!
   updateUser(id: String!, data: addUserInput!): UserSchema!
   deleteUser(id: String!): UserSchema!
+  createTask(data: TaskInput!): task!
+  updateTask(id: String!, data: TaskInput!): task!
+  deleteTask(id: String!): task!
 }
 
 input addUserInput {
   username: String!
   email: String!
   age: Int!
+}
+
+input TaskInput {
+  title: String!
+  description: String!
+  priority: priorityType!
+  userId: String!
 }
